@@ -18,7 +18,7 @@ searcher:
   name: single
   metric: FIDInfinity
   max_length:
-    batches: 400
+    batches: 40000
   smaller_is_better: True
 entrypoint: train_wgan:TrainWGAN
 ## Cluster
