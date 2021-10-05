@@ -1,0 +1,48 @@
+description: NSGAN with the CELEBA dataset
+name: NSGAN_FINAL_CELEBA
+data:
+  dim: [3, 64, 64]
+  dataset: 'celeba'
+  global_parameters: ./config/global_parameters.yaml
+hyperparameters:
+  global_batch_size: 32
+  lr: 0.0002
+  b1: 0.5
+  b2: 0.999
+  latent_dim: 100
+  evaluate_while_trainig: True
+  disc_iterations: 1
+searcher:
+  name: single
+  metric: FIDInfinity
+  max_length:
+    batches: 400
+  smaller_is_better: True
+entrypoint: train_nsgan:TrainNSGAN
+## Cluster
+#data:
+#  global_parameters: ./config/global_parameters.yaml
+#  train_data: /data/ldap/celeba/original_read_only/
+#  val_data: /data/ldap/celeba/original_read_only/
+#  worker: 8
+resources:
+  agent_label: student-cluster
+checkpoint_storage:
+  save_trial_best: 0
+  save_trial_latest: 0
+  save_experiment_best: 0
+# Docker container used
+environment:
+  image:
+    cpu: "deepprojects/determined-pytorch-1.9-tf-2.6-cpu:1.0.0" # deepprojects/determined-pytorch-1.7-tf-2.4-cpu:1.1.2 / deepprojects/determined-pytorch-1.8-tf-2.4-cpu:1.0.1
+    gpu: "deepprojects/determined-cuda-112-pytorch-1.9-tf-2.6-gpu:1.0.0" # deepprojects/determined-cuda-110-pytorch-1.7-tf-2.4-gpu:1.1.2 / deepprojects/determined-cuda-111-pytorch-1.8-tf-2.4-gpu:1.0.1
+# Bind Avocado into the docker container
+bind_mounts:
+  - host_path: /data/ldap
+    container_path: /data/ldap
+    read_only: true
+## Max tries of restarts on error
+#max_restarts: 0
+## Seed
+#reproducibility:
+#  experiment_seed: 1602840284

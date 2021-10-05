@@ -1,0 +1,50 @@
+save_images:
+  real_images:
+    save: True
+    number_of_images: 1000
+    file_name: 'real.pt'
+    path: '/determined_shared_fs/imgs/'
+  fake_images:
+    save: True
+    number_of_images: 1000
+    file_name: 'fake.pt'
+    path: '/determined_shared_fs/imgs/'
+training_metrics:
+  FID:
+    feature: 2048
+  IS:
+    feature: 'logits_unbiased'
+    splits: 10
+  KID:
+    feature: 2048
+    subsets: 100
+    subset_size: 1000
+    degree: 3
+    gamma: None
+    coef: 1.0
+  ISInfinity:
+    num_im: 50000
+    num_points: 15
+  FIDInfinity:
+    num_im: 50000
+    num_points: 15
+evaluation_metrics:
+  FID:
+    feature: 2048
+  IS:
+    feature: 'logits_unbiased'
+    splits: 10
+  KID:
+    feature: 2048
+    subsets: 100
+    subset_size: 1000
+    degree: 3
+    gamma: None
+    coef: 1.0
+  ISInfinity:
+    num_im: 10000
+    num_points: 15
+  FIDInfinity:
+    num_im: 10000
+    num_points: 15
+
