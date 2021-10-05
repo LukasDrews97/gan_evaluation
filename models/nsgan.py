@@ -62,7 +62,7 @@ class Generator(nn.Module):
 
 class Discriminator(nn.Module):
     """
-    Creates a discriminator network based on linear layers, batch normalization and LeakyReLU activation functions.
+    Creates a discriminator network based on linear layers and LeakyReLU activation functions.
     Args:
         img_dim:
             Image size with format (channels, width, height)
